@@ -1,38 +1,148 @@
-.App {
-  text-align: center;
+@import url("./assets/bootstrap-icons.css");
+
+:root {
+  --bg-00dp: #121924;
+  --bg-01dp: #1e252f;
+  --bg-02dp: #232933;
+  --bg-03dp: #252b35;
+  --bg-04dp: #272e38;
+  --bg-06dp: #2c323c;
+  --bg-08dp: #2f353f;
+  --bg-12dp: #333943;
+  --bg-16dp: #353b45;
+  --bg-24dp: #383e47;
+  --primary: #0d6efd;
+  --primary-dark: #103770;
+  --primary-light: #9ec5fe;
+  --secondary: #e9ecef;
+  --secondary-dark: #68696a;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  height: 100vh;
+  background-color: var(--bg-00dp);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app .row {
+  height: 90vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar.navbar-dark {
+  background-color: var(--bg-02dp);
+}
+
+.list-group {
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: var(--bg-01dp) !important;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.modal-content .list-group-item {
+  background-color: var(--bg-12dp);
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+  background-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+input.form-control,
+input.form-control:focus,
+select.form-select {
+  background-color: var(--bg-06dp);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-dark) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--primary-dark) !important;
+}
+
+.dropdown-menu-dark .dropdown-item:hover {
+  background-color: var(--primary-dark) !important;
+}
+
+.presentation {
+  height: 100%;
+}
+
+.app .meeting-sidebar {
+  padding-left: 0;
+  padding-right: 0;
+  background: var(--bg-01dp);
+  height: 100%;
+  overflow: auto;
+}
+
+.meeting-info-btn {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  border-radius: 0 !important;
+}
+.meeting-info-btn:hover,
+.meeting-info-btn:focus {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.meeting-info-btn:focus {
+  box-shadow: none !important;
+}
+
+.meeting-queue {
+  border-radius: 0 !important;
+}
+
+.meeting-queue > .queue-item {
+  background-color: var(--bg-12dp);
+  color: #fff;
+}
+
+.navbar {
+  margin-left: calc(-1 * var(--bs-gutter-x, 0.75rem));
+  margin-right: calc(-1 * var(--bs-gutter-x, 0.75rem));
+  max-height: 10vh;
+}
+
+.navbar-logo {
+  width: 11.625rem;
+}
+
+.navbar .projection-btn {
+  height: 10vh;
+  border-radius: 0;
+}
+
+/*** SCROLLBAR ***/
+/* width */
+.meeting-queue::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+/* Track */
+.meeting-queue::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 0.25rem;
+}
+
+/* Handle */
+.meeting-queue::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.25rem;
+}
+
+/* Handle on hover */
+.meeting-queue::-webkit-scrollbar-thumb:hover {
+  background: #666;
 }
