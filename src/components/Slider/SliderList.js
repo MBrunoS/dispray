@@ -8,7 +8,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export default function SliderList({ blocks, active, clickHandler }) {
   return (
-    <ListGroup variant="flush" className="flex-grow-1">
+    <ListGroup className="flex-grow-1 scrollable">
       {blocks.map((block, i) => {
         return (
           <ListGroup.Item
@@ -17,7 +17,6 @@ export default function SliderList({ blocks, active, clickHandler }) {
             onClick={clickHandler}
             key={i}
             data-index={i}
-            variant="secondary"
           >
             {block.map((line, index) => {
               return (

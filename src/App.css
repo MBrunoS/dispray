@@ -45,12 +45,6 @@
   color: white;
 }
 
-.list-group-item-action:focus,
-.list-group-item-action:hover {
-  background-color: var(--primary-dark) !important;
-  color: white !important;
-}
-
 input.form-control,
 input.form-control:focus,
 select.form-select {
@@ -74,16 +68,11 @@ select.form-select {
   background-color: var(--primary-dark) !important;
 }
 
-.presentation {
-  height: 100%;
-}
-
 .app .meeting-sidebar {
   padding-left: 0;
   padding-right: 0;
   background: var(--bg-01dp);
   height: 100%;
-  overflow: auto;
 }
 
 .meeting-info-btn {
@@ -100,13 +89,43 @@ select.form-select {
   box-shadow: none !important;
 }
 
-.meeting-queue {
+.scrollable {
+  height: 100%;
+  overflow: auto;
+}
+
+.list-group,
+.queue-item .btn {
   border-radius: 0 !important;
 }
 
-.meeting-queue > .queue-item {
+.queue-item {
+  margin-bottom: 1px;
+}
+
+.queue-item .btn {
+  border: 0;
+}
+
+.list-group .list-group-item {
   background-color: var(--bg-12dp);
   color: #fff;
+}
+
+.list-group-item-action.active,
+.list-group-item-action:focus,
+.list-group-item-action:hover {
+  background-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.presentation {
+  height: 100%;
+}
+
+.slider {
+  background-color: var(--bg-04dp);
+  height: 100%;
 }
 
 .navbar {
@@ -126,23 +145,23 @@ select.form-select {
 
 /*** SCROLLBAR ***/
 /* width */
-.meeting-queue::-webkit-scrollbar {
+.scrollable::-webkit-scrollbar {
   width: 0.5rem;
 }
 
 /* Track */
-.meeting-queue::-webkit-scrollbar-track {
+.scrollable::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 0.25rem;
 }
 
 /* Handle */
-.meeting-queue::-webkit-scrollbar-thumb {
+.scrollable::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 0.25rem;
 }
 
 /* Handle on hover */
-.meeting-queue::-webkit-scrollbar-thumb:hover {
+.scrollable::-webkit-scrollbar-thumb:hover {
   background: #666;
 }

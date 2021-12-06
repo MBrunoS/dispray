@@ -11,7 +11,7 @@ export default function Presentation() {
     <Row>
       <Col
         xs={4}
-        className="d-flex flex-column gap-2 justify-content-evenly bg-secondary"
+        className="d-flex flex-column gap-2 justify-content-evenly slider"
       >
         <Slider resource={activeElement.song.lyric} />
       </Col>
@@ -20,8 +20,8 @@ export default function Presentation() {
     activeElement?.type === "bible" && (
       <Row>
         <Col
-          xs={4}
-          className="d-flex flex-column gap-2 justify-content-evenly bg-secondary"
+          xs={3}
+          className="d-flex flex-column gap-2 justify-content-evenly py-2 slider"
         >
           <Slider resource={activeElement.passage.verses} />
         </Col>

@@ -18,7 +18,7 @@ export default function BiblePicker(props) {
   const [verses, setVerses] = useState([]);
   const [verseStart, setVerseStart] = useState("");
   const [verseEnd, setVerseEnd] = useState("");
-  const { upsertService, activeService } = useContext(DBContext);
+  const { upsertMeeting, activeMeeting } = useContext(DBContext);
 
   const handleBook = (e) => {
     setBookName(e.target.value);
@@ -42,10 +42,10 @@ export default function BiblePicker(props) {
     const passage = getPassage(bookName, chapter, verseStart, verseEnd);
 
     const service = {
-      ...activeService,
-      elements: [...activeService.elements, { type: "bible", passage }],
+      ...activeMeeting,
+      elements: [...activeMeeting.elements, { type: "bible", passage }],
     };
-    upsertService(service);
+    upsertMeeting(service);
   };
 
   useEffect(() => {
