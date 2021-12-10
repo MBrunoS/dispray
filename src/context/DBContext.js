@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PouchDB from "pouchdb-browser";
+import useProjectionScreen from "../hooks/useProjectionScreen";
 
 export const DBContext = React.createContext();
 
@@ -11,8 +12,15 @@ export default function DBContextProvider({ children }) {
     elements: [],
   };
   const [meetings, setMeetings] = useState([]);
-  const [activeMeeting, setActiveMeeting] = useState(INIT_ACTIVE_MEETING);
-  const [activeElement, setActiveElement] = useState("");
+  const [activeMeeting, setActvMeeting] = useState(INIT_ACTIVE_MEETING);
+  const [activeElement, setActiveElement] = useState(null);
+  const projectionScreen = useProjectionScreen();
+
+  const setActiveMeeting = (meeting) => {
+    setActvMeeting(meeting);
+    setActiveElement(null);
+    projectionScreen.clear();
+  };
 
   async function fetchMeetings() {
     const find = await meetingsDB.allDocs({

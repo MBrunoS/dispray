@@ -18,13 +18,17 @@ export default function SliderList({ blocks, active, clickHandler }) {
             key={i}
             data-index={i}
           >
-            {block.map((line, index) => {
-              return (
-                <p className="m-0" key={index}>
-                  {line}
-                </p>
-              );
-            })}
+            {Array.isArray(block) ? (
+              block.map((line, index) => {
+                return (
+                  <p className="m-0" key={index}>
+                    {line}
+                  </p>
+                );
+              })
+            ) : (
+              <p className="m-0">{block}</p>
+            )}
           </ListGroup.Item>
         );
       })}

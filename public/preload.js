@@ -1,4 +1,14 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-// This is to enable "require" in the renderer
-contextBridge.exposeInMainWorld("ipcRenderer", ipcRenderer);
+// We must do this to expose "ipcRenderer.on" and make it be functional
+contextBridge.exposeInMainWorld("electron", {
+  ipcRenderer: {
+    ...ipcRenderer,
+    on: (channel, listener) => {
+      ipcRenderer.on(channel, listener);
+    },
+    removeAllListeners: (channel) => {
+      ipcRenderer.removeAllListeners(channel);
+    },
+  },
+});

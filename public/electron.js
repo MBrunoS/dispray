@@ -1,8 +1,6 @@
 const { app, BrowserWindow, ipcMain, Menu, screen } = require("electron");
 const path = require("path");
-const url = require("url");
 const isDev = require("electron-is-dev");
-const { Console } = require("console");
 
 let mainWindow, projectionWindow;
 
@@ -42,6 +40,10 @@ function createProjectionWindow() {
     parent: mainWindow,
     closable: false,
     show: false,
+    webPreferences: {
+      nodeIntegration: false,
+      preload: `${path.join(__dirname, "/preload.js")}`,
+    },
   });
   projectionWindow.loadURL(
     isDev
@@ -53,8 +55,19 @@ function createProjectionWindow() {
   ipcMain.on("PROJECTION_SHOW", () => {
     projectionWindow.show();
   });
+
   ipcMain.on("PROJECTION_HIDE", () => {
     projectionWindow.hide();
+  });
+
+  projectionWindow.webContents.on("did-finish-load", () => {
+    ipcMain.on("PROJECTION_UPDATE", (e, data) => {
+      projectionWindow.webContents.send("update-proj", data);
+    });
+
+    ipcMain.on("PROJECTION_CLEAR", () => {
+      projectionWindow.webContents.send("clear-proj");
+    });
   });
 }
 
@@ -63,6 +76,20 @@ function createProjectionWindow() {
 app.on("ready", () => {
   createWindow();
   createProjectionWindow();
+
+  // react dev tools
+  const {
+    default: installExtension,
+    REACT_DEVELOPER_TOOLS,
+  } = require("electron-devtools-installer");
+
+  installExtension(REACT_DEVELOPER_TOOLS)
+    .then((name) => {
+      console.log(`Added Extension:  ${name}`);
+    })
+    .catch((err) => {
+      console.log("An error occurred: ", err);
+    });
 });
 
 app.on("window-all-closed", () => {
