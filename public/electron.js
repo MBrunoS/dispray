@@ -61,12 +61,20 @@ function createProjectionWindow() {
   });
 
   projectionWindow.webContents.on("did-finish-load", () => {
-    ipcMain.on("PROJECTION_UPDATE", (e, data) => {
-      projectionWindow.webContents.send("update-proj", data);
+    ipcMain.on("PROJECTION_UPDATE_THEME", (e, newTheme) => {
+      projectionWindow.webContents.send("update-projection-theme", newTheme);
     });
 
-    ipcMain.on("PROJECTION_CLEAR", () => {
-      projectionWindow.webContents.send("clear-proj");
+    ipcMain.on("PROJECTION_UPDATE_TEXT", (e, data) => {
+      projectionWindow.webContents.send("update-projection-text", data);
+    });
+
+    ipcMain.on("PROJECTION_CLEAR_THEME", () => {
+      projectionWindow.webContents.send("clear-projection-theme");
+    });
+
+    ipcMain.on("PROJECTION_CLEAR_TEXT", () => {
+      projectionWindow.webContents.send("clear-projection-text");
     });
   });
 }

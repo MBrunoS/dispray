@@ -1,11 +1,27 @@
 export default function useProjectionWindow() {
-  function show() {
-    window.electron.ipcRenderer.send("PROJECTION_SHOW");
-  }
+  return {
+    show: () => {
+      window.electron.ipcRenderer.send("PROJECTION_SHOW");
+    },
 
-  function hide() {
-    window.electron.ipcRenderer.send("PROJECTION_HIDE");
-  }
+    hide: () => {
+      window.electron.ipcRenderer.send("PROJECTION_HIDE");
+    },
 
-  return { showProjWindow: show, hideProjWindow: hide };
+    updateTheme: (newTheme) => {
+      window.electron.ipcRenderer.send("PROJECTION_UPDATE_THEME", newTheme);
+    },
+
+    updateText: (data) => {
+      window.electron.ipcRenderer.send("PROJECTION_UPDATE_TEXT", data);
+    },
+
+    clearTheme: () => {
+      window.electron.ipcRenderer.send("PROJECTION_CLEAR_THEME");
+    },
+
+    clearText: () => {
+      window.electron.ipcRenderer.send("PROJECTION_CLEAR_TEXT");
+    },
+  };
 }

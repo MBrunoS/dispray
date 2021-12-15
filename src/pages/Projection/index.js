@@ -1,43 +1,65 @@
 import React, { useEffect, useState } from "react";
-import deepmerge from "deepmerge";
+import useResources from "../../hooks/useResources";
 import "./styles.css";
 
-const INITIAL_SCREEN_CONFIG = {
-  mainText: { color: "#ffffff", lines: [] },
-  footerText: { color: "#ffffff", content: "" },
-  background: "#000000",
-};
-
 export default function Projection() {
-  const [screen, setScreen] = useState(INITIAL_SCREEN_CONFIG);
+  const { themes } = useResources();
+  const [theme, setTheme] = useState(themes[0]);
+  const [mainText, setMainText] = useState("");
+  const [footerText, setFooterText] = useState("");
 
   useEffect(() => {
-    window.electron.ipcRenderer.on("update-proj", (e, config) => {
-      setScreen(deepmerge(screen, config));
+    window.electron.ipcRenderer.on("update-projection-theme", (e, newTheme) => {
+      setTheme(newTheme);
     });
 
-    window.electron.ipcRenderer.on("clear-proj", () => {
-      setScreen(INITIAL_SCREEN_CONFIG);
+    window.electron.ipcRenderer.on("update-projection-text", (e, data) => {
+      setMainText(data.mainText);
+      setFooterText(data.footerText);
+    });
+
+    window.electron.ipcRenderer.on("clear-projection-theme", () => {
+      setTheme(themes[0]);
+    });
+
+    window.electron.ipcRenderer.on("clear-projection-text", () => {
+      setMainText("");
+      setFooterText("");
     });
 
     return () => {
-      window.electron.ipcRenderer.removeAllListeners("update-proj");
-      window.electron.ipcRenderer.removeAllListeners("clear-proj");
+      window.electron.ipcRenderer.removeAllListeners("update-projection-theme");
+      window.electron.ipcRenderer.removeAllListeners("update-projection-text");
+      window.electron.ipcRenderer.removeAllListeners("clear-projection-theme");
+      window.electron.ipcRenderer.removeAllListeners("clear-projection-text");
     };
   }, []);
 
   return (
-    <div className="d-flex flex-column justify-content-center gap-2 text-center projection-screen">
-      <div className="projection-main-text">
-        {Array.isArray(screen.mainText.lines) ? (
-          screen.mainText.lines.map((line, i) => <p key={i}>{line}</p>)
+    <div
+      className="d-flex flex-column justify-content-center gap-2 text-center projection-screen"
+      style={{
+        ...theme.styles,
+        backgroundImage: theme.styles.backgroundImage
+          ? `url(${process.env.PUBLIC_URL}/${theme.styles.backgroundImage})`
+          : "none",
+      }}
+    >
+      <div
+        className="projection-main-text"
+        style={{
+          color: theme.mainText.color,
+        }}
+      >
+        {Array.isArray(mainText) ? (
+          mainText.map((line, i) => <p key={i}>{line}</p>)
         ) : (
-          <p>{screen.mainText.lines}</p>
+          <p>{mainText}</p>
         )}
       </div>
 
-      {screen.footerText.content && (
-        <p className="projection-footer-text">{screen.footerText.content}</p>
+      {footerText && (
+        <p style={{ color: theme.footerText.color }}>{footerText}</p>
       )}
     </div>
   );

@@ -4,13 +4,17 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
+import useProjectionWindow from "../../../hooks/useProjectionWindow";
 
 export default function MeetingsList({ show, close }) {
-  const { meetings, setActiveMeeting } = useContext(DBContext);
+  const { meetings, setActiveMeeting, setActiveItem } = useContext(DBContext);
   const { showMeetingsModal } = useContext(ModalsContext);
+  const projectionWindow = useProjectionWindow();
 
   function handleClick(meeting) {
     setActiveMeeting(meeting);
+    setActiveItem(null);
+    projectionWindow.clearText();
     close();
   }
 

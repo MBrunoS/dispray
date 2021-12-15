@@ -6,11 +6,13 @@ import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
+import useProjectionWindow from "../../../hooks/useProjectionWindow";
 
 export default function CreateMeetingForm({ isOpen, close }) {
-  const { upsertMeeting, setActiveMeeting } = useContext(DBContext);
-
+  const { upsertMeeting, setActiveMeeting, setActiveItem } =
+    useContext(DBContext);
   const { showCreateModal } = useContext(ModalsContext);
+  const projectionWindow = useProjectionWindow();
 
   const [name, setName] = useState("");
 
@@ -29,10 +31,14 @@ export default function CreateMeetingForm({ isOpen, close }) {
       _id: new Date().toISOString(),
       name,
       elements: [],
+      theme: null,
     };
 
     upsertMeeting(meeting);
     setActiveMeeting(meeting);
+    setActiveItem(null);
+    projectionWindow.clearText();
+
     close();
   };
 

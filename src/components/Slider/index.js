@@ -4,11 +4,11 @@ import BibleSlider from "./BibleSlider";
 import SongSlider from "./SongSlider";
 
 export default function Slider({ resource }) {
-  const { activeElement } = useContext(DBContext);
+  const { activeItem } = useContext(DBContext);
 
   return (
     <>
-      {activeElement.type === "bible" ? (
+      {activeItem.type === "bible" ? (
         <BibleSlider verses={resource} />
       ) : (
         <SongSlider lyric={resource} />

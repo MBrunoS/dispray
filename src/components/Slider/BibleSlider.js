@@ -3,33 +3,29 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import SliderList from "./SliderList";
 import { DBContext } from "../../context/DBContext";
-import useProjectionScreen from "../../hooks/useProjectionScreen";
+import useProjectionWindow from "../../hooks/useProjectionWindow";
 
 export default function BibleSlider({ verses }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { activeElement } = useContext(DBContext);
-  const projectionScreen = useProjectionScreen();
-  const { passage } = activeElement;
+  const { activeItem } = useContext(DBContext);
+  const projectionWindow = useProjectionWindow();
+  const { passage } = activeItem;
 
   useEffect(() => {
     setActiveIndex(0);
 
-    projectionScreen.update({
-      mainText: { lines: verses[0] },
-      footerText: {
-        content: `${passage.book} ${passage.chapter}:${passage.start}`,
-      },
+    projectionWindow.updateText({
+      mainText: verses[0],
+      footerText: `${passage.book} ${passage.chapter}:${passage.start}`,
     });
   }, [verses]);
 
   useEffect(() => {
-    projectionScreen.update({
-      mainText: { lines: verses[0] },
-      footerText: {
-        content: `${passage.book} ${passage.chapter}:${
-          passage.start + activeIndex
-        }`,
-      },
+    projectionWindow.updateText({
+      mainText: verses[activeIndex],
+      footerText: `${passage.book} ${passage.chapter}:${
+        passage.start + activeIndex
+      }`,
     });
   }, [activeIndex]);
 

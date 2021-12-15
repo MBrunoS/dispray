@@ -5,14 +5,14 @@ import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../../context/DBContext";
 
 export default function MeetingQueueItem({ item, deleteItem, index }) {
-  const { setActiveElement } = useContext(DBContext);
+  const { setActiveItem } = useContext(DBContext);
 
   return (
     <ButtonGroup className="queue-item">
       <ListGroupItem
         action
         className="d-flex align-items-center gap-2 p-2"
-        onClick={() => setActiveElement(item)}
+        onClick={() => setActiveItem(item)}
       >
         {item.type === "bible" ? (
           <>

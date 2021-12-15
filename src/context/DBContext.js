@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import PouchDB from "pouchdb-browser";
-import useProjectionScreen from "../hooks/useProjectionScreen";
 
 export const DBContext = React.createContext();
 
 export default function DBContextProvider({ children }) {
   const meetingsDB = new PouchDB("dispray-services");
+  const themesDB = new PouchDB("dispray-themes");
+
   const INIT_ACTIVE_MEETING = {
     _id: "",
     name: "",
     elements: [],
+    theme: null,
   };
-  const [meetings, setMeetings] = useState([]);
-  const [activeMeeting, setActvMeeting] = useState(INIT_ACTIVE_MEETING);
-  const [activeElement, setActiveElement] = useState(null);
-  const projectionScreen = useProjectionScreen();
 
-  const setActiveMeeting = (meeting) => {
-    setActvMeeting(meeting);
-    setActiveElement(null);
-    projectionScreen.clear();
-  };
+  const [meetings, setMeetings] = useState([]);
+  const [themes, setThemes] = useState([]);
+  const [activeMeeting, setActiveMeeting] = useState(INIT_ACTIVE_MEETING);
+  const [activeItem, setActiveItem] = useState(null);
 
   async function fetchMeetings() {
     const find = await meetingsDB.allDocs({
@@ -37,18 +34,36 @@ export default function DBContextProvider({ children }) {
     fetchMeetings();
   }
 
+  async function fetchThemes() {
+    const find = await themesDB.allDocs({
+      include_docs: true,
+    });
+    setThemes(find.rows.map((item) => item.doc));
+  }
+
+  // update or insert
+  async function upsertTheme(theme) {
+    const { id } = await themesDB.put(theme);
+    const updated = await themesDB.get(id);
+    fetchThemes();
+  }
+
   return (
     <DBContext.Provider
       value={{
         meetingsDB,
         meetings,
+        fetchThemes,
+        upsertTheme,
+        themesDB,
+        themes,
         fetchMeetings,
         upsertMeeting,
         INIT_ACTIVE_MEETING,
         activeMeeting,
         setActiveMeeting,
-        activeElement,
-        setActiveElement,
+        activeItem,
+        setActiveItem,
       }}
     >
       {children}

@@ -1,29 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import SliderList from "./SliderList";
-import { DBContext } from "../../context/DBContext";
-import useProjectionScreen from "../../hooks/useProjectionScreen";
+import useProjectionWindow from "../../hooks/useProjectionWindow";
 
 export default function SongSlider({ lyric }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const blocks = lyric.map((block) => block.split("\n"));
-  const { activeElement } = useContext(DBContext);
-  const projectionScreen = useProjectionScreen();
+  const projectionWindow = useProjectionWindow();
 
   useEffect(() => {
     setActiveIndex(0);
 
-    const elem = activeElement.type === "bible" ? activeElement.passage : null;
-
-    projectionScreen.update({
-      mainText: { lines: blocks[0] },
+    projectionWindow.updateText({
+      mainText: blocks[0],
     });
   }, [lyric]);
 
   useEffect(() => {
-    projectionScreen.update({
-      mainText: { lines: blocks[activeIndex] },
+    projectionWindow.updateText({
+      mainText: blocks[activeIndex],
     });
   }, [activeIndex]);
 

@@ -11,7 +11,7 @@ export default function Menubar() {
   const { isMeetingsModalOpen, showMeetingsModal, closeMeetingsModal } =
     useContext(ModalsContext);
   const [isProjVisible, setIsProjVisible] = useState(false);
-  const { showProjWindow, hideProjWindow } = useProjectionWindow();
+  const projectionWindow = useProjectionWindow();
 
   return (
     <>
@@ -21,6 +21,7 @@ export default function Menubar() {
             <img
               src={process.env.PUBLIC_URL + "/logo-white.png"}
               className="navbar-logo"
+              alt="Dispray"
             />
           </Navbar.Brand>
           <Nav className="me-auto">
@@ -51,9 +52,9 @@ export default function Menubar() {
               className="projection-btn"
               onClick={() => {
                 if (isProjVisible) {
-                  hideProjWindow();
+                  projectionWindow.hide();
                 } else {
-                  showProjWindow();
+                  projectionWindow.show();
                 }
                 setIsProjVisible(!isProjVisible);
               }}

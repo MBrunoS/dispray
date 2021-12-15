@@ -1,33 +1,38 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { DBContext } from "../../context/DBContext";
 import Slider from "../Slider/";
-import ItemEditor from "./ItemEditor";
+import Preview from "./Preview";
+import Themes from "./Themes";
 
 export default function Presentation() {
-  const { activeElement } = useContext(DBContext);
+  const { activeItem } = useContext(DBContext);
 
-  return activeElement?.type === "song" ? (
-    <Row>
-      <Col
-        xs={4}
-        className="d-flex flex-column gap-2 justify-content-evenly slider"
-      >
-        <Slider resource={activeElement.song.lyric} />
-      </Col>
-    </Row>
-  ) : (
-    activeElement?.type === "bible" && (
+  return (
+    activeItem && (
       <Row>
         <Col
           xs={3}
-          className="d-flex flex-column gap-2 justify-content-evenly py-2 slider"
+          className="d-flex flex-column gap-2 justify-content-evenly slider"
         >
-          <Slider resource={activeElement.passage.verses} />
+          {activeItem.type === "song" ? (
+            <Slider resource={activeItem.song.lyric} />
+          ) : (
+            <Slider resource={activeItem.passage.verses} />
+          )}
         </Col>
-        <Col>
-          <ItemEditor />
+        <Col className="preview-themes">
+          <Row>
+            <Col className="d-flex flex-column justify-content-center">
+              <Preview />
+            </Col>
+          </Row>
+          <Row>
+            <Col className="theme-editor">
+              <Themes />
+            </Col>
+          </Row>
         </Col>
       </Row>
     )
