@@ -2,6 +2,8 @@ import bible from "../db/acf.json";
 import songs from "../db/songs.json";
 import themes from "../db/themes.json";
 
-export default function useResources() {
+const useResources = () => {
   return { bible, songs, themes };
-}
+};
+
+export default useResources;

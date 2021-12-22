@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
+        {/* <Route
           exact
           path="/"
           element={
@@ -17,10 +17,10 @@ function App() {
               <Home />
             </Container>
           }
-        />
+        /> */}
         <Route
           exact
-          path="/meeting"
+          path="/"
           element={
             <Container fluid className="app">
               <Meeting />

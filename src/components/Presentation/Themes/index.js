@@ -8,45 +8,38 @@ import useResources from "../../../hooks/useResources";
 import useProjectionWindow from "../../../hooks/useProjectionWindow";
 
 export default function Themes() {
-  const { themes: defaultThemes } = useResources();
-  const { themes, fetchThemes } = useContext(DBContext);
+  const { themes } = useResources();
+  const { activeMeeting, upsertMeeting } = useContext(DBContext);
   const projectionWindow = useProjectionWindow();
 
-  useEffect(() => {
-    fetchThemes();
-  }, []);
-
-  const handleDefaultTheme = (index) => {
-    projectionWindow.updateTheme(defaultThemes[index]);
-  };
-
-  const handleCustomTheme = (index) => {
-    projectionWindow.updateTheme(themes[index]);
+  const handleTheme = (theme) => {
+    const meeting = {
+      ...activeMeeting,
+      theme: theme,
+    };
+    upsertMeeting(meeting);
+    projectionWindow.updateTheme(theme);
   };
 
   return (
     <>
       <h4 className="themes-title">Temas</h4>
 
-      <Container fluid className="py-2">
-        <Row>
-          {defaultThemes.map((theme, i) => (
-            <Col md={4} lg={3} key={i}>
-              <Card onClick={() => handleDefaultTheme(i)}>
-                <Card.Body>
-                  <Card.Subtitle>{theme.name}</Card.Subtitle>
-                  <Card.Text>Tema Padrão</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
+      <Container fluid>
+        <Row md={3} lg={4} className="py-2 g-2">
           {themes.map((theme, i) => (
-            <Col md={4} lg={3} key={i}>
-              <Card onClick={() => handleCustomTheme(i)}>
+            <Col key={i}>
+              <Card className="text-center theme-card">
                 <Card.Body>
                   <Card.Subtitle>{theme.name}</Card.Subtitle>
-                  <Card.Text>Tema Personalizado</Card.Text>
                 </Card.Body>
+                <Card.Footer
+                  as="button"
+                  className="btn btn-primary-dark stretched-link"
+                  onClick={() => handleTheme(themes[i])}
+                >
+                  Aplicar
+                </Card.Footer>
               </Card>
             </Col>
           ))}

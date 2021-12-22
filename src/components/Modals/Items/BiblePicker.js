@@ -43,7 +43,7 @@ export default function BiblePicker(props) {
 
     const service = {
       ...activeMeeting,
-      elements: [...activeMeeting.elements, { type: "bible", passage }],
+      elements: [...activeMeeting.elements, { ...passage }],
     };
     upsertMeeting(service);
   };

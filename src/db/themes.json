@@ -4,7 +4,8 @@
     "mainText": { "color": "#ffffff" },
     "footerText": { "color": "#909090" },
     "styles": {
-      "backgroundColor": "#000000"
+      "backgroundColor": "#000000",
+      "emphasisColor": "#ffff00"
     }
   },
   {
@@ -12,7 +13,8 @@
     "mainText": { "color": "#000000" },
     "footerText": { "color": "#6f6f6f" },
     "styles": {
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "emphasisColor": "#ff0000"
     }
   },
   {
@@ -24,7 +26,8 @@
       "backgroundImage": "themes-bgs/congresso-light.png",
       "backgroundPosition": "center",
       "backgroundRepeat": "no-repeat",
-      "backgroundSize": "cover"
+      "backgroundSize": "cover",
+      "emphasisColor": "#f6911f"
     }
   },
   {
@@ -36,7 +39,8 @@
       "backgroundImage": "themes-bgs/congresso-dark.png",
       "backgroundPosition": "bottom center",
       "backgroundRepeat": "no-repeat",
-      "backgroundSize": "cover"
+      "backgroundSize": "cover",
+      "emphasisColor": "#f6911f"
     }
   }
 ]

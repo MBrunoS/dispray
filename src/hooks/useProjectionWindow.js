@@ -1,4 +1,4 @@
-export default function useProjectionWindow() {
+const useProjectionWindow = () => {
   return {
     show: () => {
       window.electron.ipcRenderer.send("PROJECTION_SHOW");
@@ -24,4 +24,6 @@ export default function useProjectionWindow() {
       window.electron.ipcRenderer.send("PROJECTION_CLEAR_TEXT");
     },
   };
-}
+};
+
+export default useProjectionWindow;

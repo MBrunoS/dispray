@@ -12,17 +12,17 @@ export default function MeetingQueueItem({ item, deleteItem, index }) {
       <ListGroupItem
         action
         className="d-flex align-items-center gap-2 p-2"
-        onClick={() => setActiveItem(item)}
+        onClick={() => setActiveItem({ ...item, index })}
       >
-        {item.type === "bible" ? (
+        {item.type === "passage" ? (
           <>
             <i className="bi bi-book"></i>
-            <p className="m-0 flex-grow-1">{item.passage.reference}</p>
+            <p className="m-0 flex-grow-1">{item.reference}</p>
           </>
         ) : (
           <>
             <i className="bi bi-music-note-list"></i>
-            <p className="m-0 flex-grow-1">{item.song.title}</p>
+            <p className="m-0 flex-grow-1">{item.title}</p>
           </>
         )}
       </ListGroupItem>

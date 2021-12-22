@@ -26,10 +26,10 @@ export default function SongsItemModal({ isOpen, close }) {
   };
 
   const handleSong = (e) => {
-    const { song } = data[e.target.dataset.index];
+    const song = data[e.target.dataset.index];
     const service = {
       ...activeMeeting,
-      elements: [...activeMeeting.elements, { type: "song", song }],
+      elements: [...activeMeeting.elements, { ...song }],
     };
     upsertMeeting(service);
   };
@@ -58,7 +58,7 @@ export default function SongsItemModal({ isOpen, close }) {
             {data.length === 0 ? (
               <p>Não há resultados de pesquisa</p>
             ) : (
-              data.map(({ song }, i) => {
+              data.map((song, i) => {
                 return (
                   <ListGroup.Item
                     action

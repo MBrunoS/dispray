@@ -8,24 +8,28 @@ import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
+import useProjectionWindow from "../../../hooks/useProjectionWindow";
 
-export default function EditMeetingForm({ isOpen, close }) {
+export default function EditMeetingModal() {
   const {
     meetingsDB,
     fetchMeetings,
     upsertMeeting,
     activeMeeting,
     setActiveMeeting,
+    setActiveItem,
     INIT_ACTIVE_MEETING,
   } = useContext(DBContext);
 
-  const { showEditModal } = useContext(ModalsContext);
+  const { isEditModalOpen, closeEditModal, showEditModal } =
+    useContext(ModalsContext);
 
+  const projectionWindow = useProjectionWindow();
   const [name, setName] = useState();
 
   useEffect(() => {
     setName(activeMeeting.name);
-  }, [isOpen]);
+  }, [isEditModalOpen]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -41,19 +45,22 @@ export default function EditMeetingForm({ isOpen, close }) {
 
     upsertMeeting(meeting);
     setActiveMeeting(meeting);
-    close();
+    closeEditModal();
   };
 
   const handleDelete = () => {
     meetingsDB.remove(activeMeeting);
     setActiveMeeting(INIT_ACTIVE_MEETING);
+    setActiveItem(null);
+
     fetchMeetings();
-    close();
+    projectionWindow.clearText();
+    closeEditModal();
   };
 
   return (
     <>
-      <Modal show={isOpen} onHide={close} centered>
+      <Modal show={isEditModalOpen} onHide={closeEditModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Editar Reunião</Modal.Title>
         </Modal.Header>

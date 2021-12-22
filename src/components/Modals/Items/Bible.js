@@ -27,13 +27,10 @@ export default function BibleItemModal({ isOpen, close }) {
   };
 
   const handleVerse = (e) => {
-    const verse = data[e.target.dataset.index];
+    const passage = data[e.target.dataset.index];
     const meeting = {
       ...activeMeeting,
-      elements: [
-        ...activeMeeting.elements,
-        { type: "bible", passage: verse.passage },
-      ],
+      elements: [...activeMeeting.elements, { ...passage }],
     };
     upsertMeeting(meeting);
   };
@@ -64,7 +61,7 @@ export default function BibleItemModal({ isOpen, close }) {
             {searchValue !== "" && data.length === 0 ? (
               <p className="text-center">Não há resultados de pesquisa</p>
             ) : (
-              data.map(({ passage }, i) => {
+              data.map((passage, i) => {
                 return (
                   <ListGroup.Item
                     action
@@ -72,7 +69,8 @@ export default function BibleItemModal({ isOpen, close }) {
                     data-index={i}
                     onClick={handleVerse}
                   >
-                    {passage.verses[0]} ({passage.reference})
+                    {passage.texts[0]} ({passage.reference})
+                    {/* DÁ PRA ENXUGAR BIBLE E SONGS NUM ARQUIVO SÓ */}
                   </ListGroup.Item>
                 );
               })

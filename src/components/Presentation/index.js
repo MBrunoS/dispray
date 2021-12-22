@@ -14,13 +14,9 @@ export default function Presentation() {
       <Row>
         <Col
           xs={3}
-          className="d-flex flex-column gap-2 justify-content-evenly slider"
+          className="d-flex flex-column gap-2 justify-content-evenly py-2 slider"
         >
-          {activeItem.type === "song" ? (
-            <Slider resource={activeItem.song.lyric} />
-          ) : (
-            <Slider resource={activeItem.passage.verses} />
-          )}
+          <Slider resource={activeItem} />
         </Col>
         <Col className="preview-themes">
           <Row>

@@ -50,7 +50,6 @@ function createProjectionWindow() {
       ? "http://localhost:3000/#/projection"
       : `file://${path.join(__dirname, "../build/index.html/#/projection")}`
   );
-  // projectionWindow.loadURL("https://google.com");
 
   ipcMain.on("PROJECTION_SHOW", () => {
     projectionWindow.show();

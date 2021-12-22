@@ -13,14 +13,7 @@ import MeetingQueue from "./Queue";
 
 export default function Meeting() {
   const { activeMeeting, fetchMeetings } = useContext(DBContext);
-  const {
-    isCreateModalOpen,
-    showCreateModal,
-    closeCreateModal,
-    isEditModalOpen,
-    showEditModal,
-    closeEditModal,
-  } = useContext(ModalsContext);
+  const { showCreateModal, showEditModal } = useContext(ModalsContext);
 
   useEffect(() => {
     fetchMeetings();
@@ -50,9 +43,9 @@ export default function Meeting() {
         </Col>
       </Row>
 
-      <CreateMeetingModal isOpen={isCreateModalOpen} close={closeCreateModal} />
+      <CreateMeetingModal />
 
-      <EditMeetingModal isOpen={isEditModalOpen} close={closeEditModal} />
+      <EditMeetingModal />
     </>
   );
 }

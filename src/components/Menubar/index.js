@@ -4,12 +4,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import useProjectionWindow from "../../hooks/useProjectionWindow";
 import Button from "react-bootstrap/Button";
-import MeetingsList from "../Modals/Meetings/List";
+import ListMeetingsModal from "../Modals/Meetings/List";
 import { ModalsContext } from "../../context/ModalsContext";
 
 export default function Menubar() {
-  const { isMeetingsModalOpen, showMeetingsModal, closeMeetingsModal } =
-    useContext(ModalsContext);
+  const { showMeetingsModal } = useContext(ModalsContext);
   const [isProjVisible, setIsProjVisible] = useState(false);
   const projectionWindow = useProjectionWindow();
 
@@ -26,7 +25,7 @@ export default function Menubar() {
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
-              href="#/meeting"
+              href="#/"
               className="text-center"
               onClick={showMeetingsModal}
             >
@@ -77,7 +76,7 @@ export default function Menubar() {
         </Nav>
       </Navbar>
 
-      <MeetingsList show={isMeetingsModalOpen} close={closeMeetingsModal} />
+      <ListMeetingsModal />
     </>
   );
 }

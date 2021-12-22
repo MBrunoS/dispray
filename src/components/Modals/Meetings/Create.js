@@ -6,19 +6,18 @@ import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-import useProjectionWindow from "../../../hooks/useProjectionWindow";
 
-export default function CreateMeetingForm({ isOpen, close }) {
+export default function CreateMeetingModal() {
   const { upsertMeeting, setActiveMeeting, setActiveItem } =
     useContext(DBContext);
-  const { showCreateModal } = useContext(ModalsContext);
-  const projectionWindow = useProjectionWindow();
+  const { isCreateModalOpen, showCreateModal, closeCreateModal } =
+    useContext(ModalsContext);
 
   const [name, setName] = useState("");
 
   useEffect(() => {
     setName("");
-  }, [isOpen]);
+  }, [isCreateModalOpen]);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -37,14 +36,13 @@ export default function CreateMeetingForm({ isOpen, close }) {
     upsertMeeting(meeting);
     setActiveMeeting(meeting);
     setActiveItem(null);
-    projectionWindow.clearText();
 
-    close();
+    closeCreateModal();
   };
 
   return (
     <>
-      <Modal show={isOpen} onHide={close} centered>
+      <Modal show={isCreateModalOpen} onHide={closeCreateModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>Nova Reunião</Modal.Title>
         </Modal.Header>

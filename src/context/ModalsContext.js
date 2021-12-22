@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const ModalsContext = React.createContext();
 
 export default function ModalsContextProvider({ children }) {
-  const [isMeetingsModalOpen, setIsMeetingsModalOpen] = useState(false);
+  const [isMeetingsModalOpen, setIsMeetingsModalOpen] = useState(true);
   const showMeetingsModal = () => setIsMeetingsModalOpen(true);
   const closeMeetingsModal = () => setIsMeetingsModalOpen(false);
 
@@ -20,6 +20,10 @@ export default function ModalsContextProvider({ children }) {
   const [isSongsModalOpen, setIsSongsModalOpen] = useState(false);
   const showSongsModal = () => setIsSongsModalOpen(true);
   const closeSongsModal = () => setIsSongsModalOpen(false);
+
+  const [isEditSlideModalOpen, setIsEditSlideModalOpen] = useState(false);
+  const showEditSlideModal = () => setIsEditSlideModalOpen(true);
+  const closeEditSlideModal = () => setIsEditSlideModalOpen(false);
 
   return (
     <ModalsContext.Provider
@@ -39,6 +43,9 @@ export default function ModalsContextProvider({ children }) {
         isSongsModalOpen,
         showSongsModal,
         closeSongsModal,
+        isEditSlideModalOpen,
+        showEditSlideModal,
+        closeEditSlideModal,
       }}
     >
       {children}

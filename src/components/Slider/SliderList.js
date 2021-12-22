@@ -6,7 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 //   ['second block line 1', ...]
 // ]
 
-export default function SliderList({ blocks, active, clickHandler }) {
+export default function SliderList({ blocks, altInfo, active, clickHandler }) {
   return (
     <ListGroup className="flex-grow-1 scrollable">
       {blocks.map((block, i) => {
@@ -27,7 +27,10 @@ export default function SliderList({ blocks, active, clickHandler }) {
                 );
               })
             ) : (
-              <p className="m-0">{block}</p>
+              <p className="m-0">
+                {block}
+                {altInfo && ` (v${altInfo.start + i})`}
+              </p>
             )}
           </ListGroup.Item>
         );

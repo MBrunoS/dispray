@@ -19,11 +19,12 @@ export const getPassage = (book, chapter, vStart, vEnd) => {
     .chapters[chapter - 1].slice(vStart - 1, vEnd);
 
   return {
+    type: "passage",
     book,
     chapter,
     start: vStart,
     end: vEnd,
-    verses,
+    texts: verses,
     reference: `${book} ${chapter}:${vStart}${
       vEnd === vStart ? "" : `-${vEnd}`
     }`,
@@ -42,13 +43,12 @@ export const searchBible = (text, limit) => {
         if (index !== -1) {
           results.push({
             index,
-            passage: {
-              book: book.name,
-              chapter: chapIndex + 1,
-              start: verseIndex + 1,
-              verses: [verse],
-              reference: `${book.name} ${chapIndex + 1}:${verseIndex + 1}`,
-            },
+            type: "passage",
+            book: book.name,
+            chapter: chapIndex + 1,
+            start: verseIndex + 1,
+            texts: [verse],
+            reference: `${book.name} ${chapIndex + 1}:${verseIndex + 1}`,
           });
         }
       }
@@ -69,7 +69,9 @@ export const searchSongs = (text, limit) => {
       if (index !== -1) {
         results.push({
           index,
-          song,
+          type: "song",
+          title: song.title,
+          texts: song.lyric,
         });
         break;
       }

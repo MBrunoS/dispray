@@ -13,6 +13,7 @@
   --bg-24dp: #383e47;
   --primary: #0d6efd;
   --primary-dark: #103770;
+  --primary-dark-hover: #102e59;
   --primary-light: #9ec5fe;
   --secondary: #e9ecef;
   --secondary-dark: #68696a;
@@ -47,6 +48,8 @@
 
 input.form-control,
 input.form-control:focus,
+textarea.form-control,
+textarea.form-control:focus,
 select.form-select {
   background-color: var(--bg-06dp);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -54,14 +57,14 @@ select.form-select {
 }
 
 .btn-secondary {
-  background-color: var(--secondary-dark) !important;
+  background-color: var(--bg-24dp) !important;
   color: #fff !important;
   border-color: transparent !important;
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus {
-  background-color: var(--primary-dark) !important;
+  background-color: var(--bg-08dp) !important;
 }
 
 .dropdown-menu-dark .dropdown-item:hover {
@@ -94,7 +97,8 @@ select.form-select {
   overflow: auto;
 }
 
-.list-group,
+.meeting-queue,
+.slider .list-group,
 .queue-item .btn {
   border-radius: 0 !important;
 }
@@ -188,8 +192,27 @@ select.form-select {
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
-  background-color: var(--bg-06dp);
+  background-color: var(--bg-04dp);
   font-size: 1.1rem;
   padding: 0.5rem 0;
   margin: 0;
+}
+
+.card.theme-card {
+  background-color: var(--bg-04dp);
+  color: #ffffff;
+}
+
+.btn.btn-primary-dark {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  color: #ffffff;
+}
+
+.btn.btn-primary-dark:hover {
+  color: #ffffff;
+}
+
+.stretched-link:hover::after {
+  background-color: rgba(0, 0, 0, 0.15);
 }
