@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -9,11 +9,21 @@ import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 
-export default function SongsItemModal({ isOpen, close }) {
+export default function SongsItemModal() {
   const { upsertMeeting, activeMeeting } = useContext(DBContext);
-  const { showSongsModal } = useContext(ModalsContext);
+  const { isSongsModalOpen, showSongsModal, closeSongsModal } =
+    useContext(ModalsContext);
+  const [didSearch, setDidSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (isSongsModalOpen) {
+      setDidSearch(false);
+      setSearchValue("");
+      setData([]);
+    }
+  }, [isSongsModalOpen]);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -21,6 +31,7 @@ export default function SongsItemModal({ isOpen, close }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDidSearch(true);
     if (searchValue.trim() === "") return;
     setData(searchSongs(searchValue, 10));
   };
@@ -36,7 +47,12 @@ export default function SongsItemModal({ isOpen, close }) {
 
   return (
     <>
-      <Modal show={isOpen} onHide={close} size="lg" centered>
+      <Modal
+        show={isSongsModalOpen}
+        onHide={closeSongsModal}
+        size="lg"
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Adicionar letras de músicas</Modal.Title>
         </Modal.Header>
@@ -55,22 +71,23 @@ export default function SongsItemModal({ isOpen, close }) {
           </Form>
 
           <ListGroup className="pt-2">
-            {data.length === 0 ? (
-              <p>Não há resultados de pesquisa</p>
-            ) : (
-              data.map((song, i) => {
-                return (
-                  <ListGroup.Item
-                    action
-                    onClick={handleSong}
-                    data-index={i}
-                    key={i}
-                  >
-                    {song.title}
-                  </ListGroup.Item>
-                );
-              })
-            )}
+            {didSearch &&
+              (data.length === 0 ? (
+                <p>Não há resultados de pesquisa</p>
+              ) : (
+                data.map((song, i) => {
+                  return (
+                    <ListGroup.Item
+                      action
+                      onClick={handleSong}
+                      data-index={i}
+                      key={i}
+                    >
+                      {song.title}
+                    </ListGroup.Item>
+                  );
+                })
+              ))}
           </ListGroup>
         </Modal.Body>
       </Modal>

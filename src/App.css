@@ -56,6 +56,10 @@ select.form-select {
   color: #fff;
 }
 
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
 .btn-secondary {
   background-color: var(--bg-24dp) !important;
   color: #fff !important;
@@ -65,6 +69,10 @@ select.form-select {
 .btn-secondary:hover,
 .btn-secondary:focus {
   background-color: var(--bg-08dp) !important;
+}
+
+.dropdown-menu.dropdown-menu-dark {
+  background-color: var(--bg-24dp);
 }
 
 .dropdown-menu-dark .dropdown-item:hover {

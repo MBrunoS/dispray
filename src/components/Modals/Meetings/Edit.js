@@ -9,6 +9,7 @@ import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import useProjectionWindow from "../../../hooks/useProjectionWindow";
+import useDialog from "../../../hooks/useDialog";
 
 export default function EditMeetingModal() {
   const {
@@ -25,6 +26,7 @@ export default function EditMeetingModal() {
     useContext(ModalsContext);
 
   const projectionWindow = useProjectionWindow();
+  const dialog = useDialog();
   const [name, setName] = useState();
 
   useEffect(() => {
@@ -49,13 +51,25 @@ export default function EditMeetingModal() {
   };
 
   const handleDelete = () => {
-    meetingsDB.remove(activeMeeting);
-    setActiveMeeting(INIT_ACTIVE_MEETING);
-    setActiveItem(null);
+    dialog(
+      {
+        type: "none",
+        buttons: ["Não", "Sim"],
+        title: "Confimar exclusão",
+        message: "Tem certeza que deseja excluir esta reunião?",
+      },
+      (response) => {
+        if (response === 1) {
+          meetingsDB.remove(activeMeeting);
+          setActiveMeeting(INIT_ACTIVE_MEETING);
+          setActiveItem(null);
 
-    fetchMeetings();
-    projectionWindow.clearText();
-    closeEditModal();
+          fetchMeetings();
+          projectionWindow.clearText();
+          closeEditModal();
+        }
+      }
+    );
   };
 
   return (

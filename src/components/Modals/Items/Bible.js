@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -10,11 +10,21 @@ import { ModalsContext } from "../../../context/ModalsContext";
 import BiblePicker from "./BiblePicker";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 
-export default function BibleItemModal({ isOpen, close }) {
+export default function BibleItemModal({}) {
   const { upsertMeeting, activeMeeting } = useContext(DBContext);
-  const { showBibleModal } = useContext(ModalsContext);
+  const { isBibleModalOpen, showBibleModal, closeBibleModal } =
+    useContext(ModalsContext);
+  const [didSearch, setDidSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (isBibleModalOpen) {
+      setDidSearch(false);
+      setSearchValue("");
+      setData([]);
+    }
+  }, [isBibleModalOpen]);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -22,6 +32,7 @@ export default function BibleItemModal({ isOpen, close }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDidSearch(true);
     if (searchValue.trim() === "") return;
     setData(searchBible(searchValue, 15));
   };
@@ -37,7 +48,12 @@ export default function BibleItemModal({ isOpen, close }) {
 
   return (
     <>
-      <Modal show={isOpen} onHide={close} size="lg" centered>
+      <Modal
+        show={isBibleModalOpen}
+        onHide={closeBibleModal}
+        size="lg"
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Adicionar versículos</Modal.Title>
         </Modal.Header>
@@ -58,23 +74,24 @@ export default function BibleItemModal({ isOpen, close }) {
           </Form>
 
           <ListGroup className="pt-2">
-            {searchValue !== "" && data.length === 0 ? (
-              <p className="text-center">Não há resultados de pesquisa</p>
-            ) : (
-              data.map((passage, i) => {
-                return (
-                  <ListGroup.Item
-                    action
-                    key={i}
-                    data-index={i}
-                    onClick={handleVerse}
-                  >
-                    {passage.texts[0]} ({passage.reference})
-                    {/* DÁ PRA ENXUGAR BIBLE E SONGS NUM ARQUIVO SÓ */}
-                  </ListGroup.Item>
-                );
-              })
-            )}
+            {didSearch &&
+              (data.length === 0 ? (
+                <p className="text-center">Não há resultados de pesquisa</p>
+              ) : (
+                data.map((passage, i) => {
+                  return (
+                    <ListGroup.Item
+                      action
+                      key={i}
+                      data-index={i}
+                      onClick={handleVerse}
+                    >
+                      {passage.texts[0]} ({passage.reference})
+                      {/* DÁ PRA ENXUGAR BIBLE E SONGS NUM ARQUIVO SÓ */}
+                    </ListGroup.Item>
+                  );
+                })
+              ))}
           </ListGroup>
         </Modal.Body>
       </Modal>

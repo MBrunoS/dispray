@@ -15,7 +15,6 @@ export default function Slider({ resource }) {
 
   useEffect(() => {
     setActiveIndex(-1);
-    console.log(resource);
   }, [resource]);
 
   useEffect(() => {

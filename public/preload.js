@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require("electron");
+const { contextBridge, ipcRenderer, dialog } = require("electron");
 
 // We must do this to expose "ipcRenderer.on" and make it be functional
 contextBridge.exposeInMainWorld("electron", {
@@ -6,6 +6,9 @@ contextBridge.exposeInMainWorld("electron", {
     ...ipcRenderer,
     on: (channel, listener) => {
       ipcRenderer.on(channel, listener);
+    },
+    once: (channel, listener) => {
+      ipcRenderer.once(channel, listener);
     },
     removeAllListeners: (channel) => {
       ipcRenderer.removeAllListeners(channel);

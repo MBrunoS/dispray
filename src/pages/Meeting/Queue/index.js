@@ -7,7 +7,7 @@ export default function MeetingQueue() {
   const { activeMeeting, upsertMeeting, fetchMeetings } = useContext(DBContext);
 
   const deleteItem = (e) => {
-    const index = e.currentTarget.dataset.index;
+    const index = e.target.dataset.index;
     activeMeeting.elements.splice(index, 1);
     upsertMeeting(activeMeeting);
     fetchMeetings();
@@ -25,7 +25,10 @@ export default function MeetingQueue() {
           />
         ))
       ) : (
-        <p className="text-center text-white">Não há itens nesta reunião</p>
+        <p className="text-center text-white mx-2">
+          Não há itens nesta reunião. Clique em um dos botões acima para
+          adicionar itens.
+        </p>
       )}
     </ListGroup>
   );

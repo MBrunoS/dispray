@@ -8,14 +8,7 @@ import BibleItemModal from "../../../components/Modals/Items/Bible";
 import SongsItemModal from "../../../components/Modals/Items/Songs";
 
 export default function MeetingButtons() {
-  const {
-    isBibleModalOpen,
-    showBibleModal,
-    closeBibleModal,
-    isSongsModalOpen,
-    showSongsModal,
-    closeSongsModal,
-  } = useContext(ModalsContext);
+  const { showBibleModal, showSongsModal } = useContext(ModalsContext);
 
   return (
     <>
@@ -45,9 +38,9 @@ export default function MeetingButtons() {
         </OverlayTrigger>
       </ButtonGroup>
 
-      <BibleItemModal isOpen={isBibleModalOpen} close={closeBibleModal} />
+      <BibleItemModal />
 
-      <SongsItemModal isOpen={isSongsModalOpen} close={closeSongsModal} />
+      <SongsItemModal />
     </>
   );
 }

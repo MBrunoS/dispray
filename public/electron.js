@@ -1,4 +1,11 @@
-const { app, BrowserWindow, ipcMain, Menu, screen } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Menu,
+  screen,
+  dialog,
+} = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
@@ -8,6 +15,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 900,
     height: 680,
+    backgroundColor: "#121924",
     webPreferences: {
       nodeIntegration: false,
       preload: `${path.join(__dirname, "/preload.js")}`,
@@ -40,6 +48,7 @@ function createProjectionWindow() {
     parent: mainWindow,
     closable: false,
     show: false,
+    backgroundColor: "#000000",
     webPreferences: {
       nodeIntegration: false,
       preload: `${path.join(__dirname, "/preload.js")}`,
@@ -57,6 +66,14 @@ function createProjectionWindow() {
 
   ipcMain.on("PROJECTION_HIDE", () => {
     projectionWindow.hide();
+  });
+
+  ipcMain.on("SHOW_DIALOG", (e, options) => {
+    const response = dialog.showMessageBoxSync(
+      BrowserWindow.getFocusedWindow(),
+      options
+    );
+    e.reply("dialog-response", response);
   });
 
   projectionWindow.webContents.on("did-finish-load", () => {
