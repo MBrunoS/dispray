@@ -8,8 +8,8 @@ export default function Projection() {
   const { themes } = useResources();
   const format = useFormattedText();
   const [theme, setTheme] = useState(themes[0]);
-  const [mainText, setMainText] = useState("");
-  const [footerText, setFooterText] = useState("");
+  const [primaryText, setPrimaryText] = useState("");
+  const [secondaryText, setSecondaryText] = useState("");
 
   const css = `.emphasis { color: ${theme.styles.emphasisColor} }`;
 
@@ -23,8 +23,8 @@ export default function Projection() {
     });
 
     window.electron.ipcRenderer.on("update-projection-text", (e, data) => {
-      setMainText(format(data.mainText));
-      setFooterText(data.footerText);
+      setPrimaryText(format(data.primaryText));
+      setSecondaryText(data.secondaryText);
     });
 
     window.electron.ipcRenderer.on("clear-projection-theme", () => {
@@ -32,8 +32,8 @@ export default function Projection() {
     });
 
     window.electron.ipcRenderer.on("clear-projection-text", () => {
-      setMainText("");
-      setFooterText("");
+      setPrimaryText("");
+      setSecondaryText("");
     });
 
     return () => {
@@ -58,18 +58,20 @@ export default function Projection() {
       <div
         className="projection-main-text"
         style={{
-          color: theme.mainText.color,
+          color: theme.primaryText.color,
         }}
       >
-        {Array.isArray(mainText) ? (
-          mainText.map((line, i) => <p key={i}>{line}</p>)
+        {Array.isArray(primaryText) ? (
+          primaryText.map((line, i) => <p key={i}>{line}</p>)
         ) : (
-          <p>{ReactHtmlParser(mainText)}</p>
+          <p>{ReactHtmlParser(primaryText)}</p>
         )}
       </div>
 
-      {footerText && (
-        <p style={{ color: theme.footerText.color }}>{footerText}</p>
+      {secondaryText && (
+        <p style={{ color: theme.secondaryText.color }} className="footer-text">
+          {secondaryText}
+        </p>
       )}
     </div>
   );

@@ -20,8 +20,8 @@ export default function Slider({ resource }) {
   useEffect(() => {
     if (activeIndex >= 0) {
       projectionWindow.updateText({
-        mainText: resource.texts[activeIndex],
-        footerText: resource.reference,
+        primaryText: resource.texts[activeIndex],
+        secondaryText: resource.reference,
       });
     }
   }, [activeIndex]);

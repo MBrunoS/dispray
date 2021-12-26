@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import { DBContext } from "../../context/DBContext";
 import Slider from "../Slider/";
 import Preview from "./Preview";
-import Themes from "./Themes";
+import ThemesList from "./ThemesList";
 
 export default function Presentation() {
   const { activeItem } = useContext(DBContext);
@@ -26,7 +26,7 @@ export default function Presentation() {
           </Row>
           <Row>
             <Col className="theme-editor">
-              <Themes />
+              <ThemesList />
             </Col>
           </Row>
         </Col>

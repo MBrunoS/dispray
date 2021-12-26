@@ -178,16 +178,6 @@ select.form-select {
   background: #666;
 }
 
-.projection-screen {
-  height: 100vh;
-  padding: 5vh 5vw;
-}
-
-.projection-main-text p {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
 .theme-editor {
   padding: 0 !important;
 }
@@ -211,6 +201,16 @@ select.form-select {
   color: #ffffff;
 }
 
+.card .card-footer {
+  padding: 0;
+  border-top: 0;
+}
+
+.card-footer .btn {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .btn.btn-primary-dark {
   background-color: var(--primary-dark);
   border-color: var(--primary-dark);
@@ -218,9 +218,10 @@ select.form-select {
 }
 
 .btn.btn-primary-dark:hover {
-  color: #ffffff;
+  background-color: var(--primary-dark-hover);
+  border-color: var(--primary-dark-hover);
 }
 
-.stretched-link:hover::after {
-  background-color: rgba(0, 0, 0, 0.15);
+.btn.btn-primary-dark:hover {
+  color: #ffffff;
 }

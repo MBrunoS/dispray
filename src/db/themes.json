@@ -1,26 +1,26 @@
 [
   {
-    "name": "Simples (Preto)",
-    "mainText": { "color": "#ffffff" },
-    "footerText": { "color": "#909090" },
+    "title": "Simples (Preto)",
+    "primaryText": { "color": "#ffffff" },
+    "secondaryText": { "color": "#909090" },
     "styles": {
       "backgroundColor": "#000000",
       "emphasisColor": "#ffff00"
     }
   },
   {
-    "name": "Simples (Branco)",
-    "mainText": { "color": "#000000" },
-    "footerText": { "color": "#6f6f6f" },
+    "title": "Simples (Branco)",
+    "primaryText": { "color": "#000000" },
+    "secondaryText": { "color": "#6f6f6f" },
     "styles": {
       "backgroundColor": "#ffffff",
       "emphasisColor": "#ff0000"
     }
   },
   {
-    "name": "Congresso (Claro)",
-    "mainText": { "color": "#000000" },
-    "footerText": { "color": "#f6911f" },
+    "title": "Congresso (Claro)",
+    "primaryText": { "color": "#000000" },
+    "secondaryText": { "color": "#f6911f" },
     "styles": {
       "backgroundColor": "transparent",
       "backgroundImage": "themes-bgs/congresso-light.png",
@@ -31,9 +31,9 @@
     }
   },
   {
-    "name": "Congresso (Escuro)",
-    "mainText": { "color": "#ffffff" },
-    "footerText": { "color": "#f6911f" },
+    "title": "Congresso (Escuro)",
+    "primaryText": { "color": "#ffffff" },
+    "secondaryText": { "color": "#f6911f" },
     "styles": {
       "backgroundColor": "transparent",
       "backgroundImage": "themes-bgs/congresso-dark.png",

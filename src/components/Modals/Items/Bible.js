@@ -10,7 +10,7 @@ import { ModalsContext } from "../../../context/ModalsContext";
 import BiblePicker from "./BiblePicker";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 
-export default function BibleItemModal({}) {
+export default function BibleItemModal() {
   const { upsertMeeting, activeMeeting } = useContext(DBContext);
   const { isBibleModalOpen, showBibleModal, closeBibleModal } =
     useContext(ModalsContext);

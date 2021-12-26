@@ -1,5 +1,5 @@
 const HIDE_REGEX = /\[\S[^[\]]+\]/gm;
-const EMPHASIS_REGEX = /\*(\S[^\*]+)\*/gm;
+const EMPHASIS_REGEX = /\*(\S[^*]+)\*/gm;
 
 const useFormattedText = () => {
   return (rawText) => {

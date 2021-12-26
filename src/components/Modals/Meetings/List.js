@@ -56,7 +56,7 @@ export default function ListMeetingsModal() {
             )}
           </ListGroup>
           <Button onClick={newMeeting}>
-            <i class="bi bi-plus"></i> Nova Reunião
+            <i className="bi bi-plus"></i> Nova Reunião
           </Button>
         </Modal.Body>
       </Modal>

@@ -2073,6 +2073,11 @@
   dependencies:
     "@types/jest" "*"
 
+"@types/tinycolor2@^1.4.2":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/tinycolor2/-/tinycolor2-1.4.3.tgz#ed4a0901f954b126e6a914b4839c77462d56e706"
+  integrity sha512-Kf1w9NE5HEgGxCRyIcRXR/ZYtDv0V8FVPtYHwLxl0O+maGX0erE77pQlD0gpP+/KByMZ87mOA79SjifhSB3PjQ==
+
 "@types/uglify-js@*":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.12.0.tgz#2bb061c269441620d46b946350c8f16d52ef37c5"
@@ -5856,6 +5861,11 @@ follow-redirects@^1.14.0:
   version "1.14.4"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.4.tgz#838fdf48a8bbdd79e52ee51fb1c94e3ed98b9379"
   integrity sha512-zwGkiSXC1MUJG/qmeIFH2HBJx9u0V46QGUe3YR1fXG8bXQxq7fLj0RjLZQ5nubr9qNJUZrH+xUcwXEoXNpfS+g==
+
+font-list@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/font-list/-/font-list-1.4.3.tgz#802db0d10424170c05c34f7bedda1fbdef729e8c"
+  integrity sha512-5UEtK0bPrkrN3pUVoE9EVme0N3LJYVs5NJubmcxZVyAydlE7sjdGajD6XrEHu44TnQdBP+s2B1dA7qWcOm1qhw==
 
 for-in@^1.0.2:
   version "1.0.2"
@@ -10190,6 +10200,11 @@ react-bootstrap@^2.0.3:
     uncontrollable "^7.2.1"
     warning "^4.0.3"
 
+react-color-gradient-picker@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-color-gradient-picker/-/react-color-gradient-picker-0.1.2.tgz#e98cbae82e5b043f41e4d3e8c75d436981a9a6aa"
+  integrity sha512-/woJfVZbp/lEwqdNfk/vxmuUj7K9imyF6C5mrsfvwvtF1uFr7THHRyEDPLZd4mD9N3opPl6Z7G7SZrFQ8qBq9w==
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"
@@ -10233,6 +10248,14 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-gcolor-picker@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-gcolor-picker/-/react-gcolor-picker-1.2.1.tgz#46dd12821bad32253324508b2bc5e094e4998182"
+  integrity sha512-jBpNofc3pxxByF43AZW4W5ci/+gtViWynuLVgUDgk8xnkUJ6W8yNDA6XKxM7GZIFGWbXyTeq4mRHlp4DrPrX1w==
+  dependencies:
+    "@types/tinycolor2" "^1.4.2"
+    tinycolor2 "^1.4.2"
 
 react-html-parser@^2.0.2:
   version "2.0.2"
@@ -11943,6 +11966,11 @@ timsort@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/timsort/-/timsort-0.3.0.tgz#405411a8e7e6339fe64db9a234de11dc31e02bd4"
   integrity sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=
+
+tinycolor2@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
+  integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
 
 tmp-promise@^3.0.2:
   version "3.0.3"

@@ -25,6 +25,13 @@ export default function ModalsContextProvider({ children }) {
   const showEditSlideModal = () => setIsEditSlideModalOpen(true);
   const closeEditSlideModal = () => setIsEditSlideModalOpen(false);
 
+  const [isCreateThemeModalOpen, setIsCreateThemeModalOpen] = useState(false);
+  const showCreateThemeModal = () => setIsCreateThemeModalOpen(true);
+  const closeCreateThemeModal = () => setIsCreateThemeModalOpen(false);
+  const [isEditThemeModalOpen, setIsEditThemeModalOpen] = useState(false);
+  const showEditThemeModal = () => setIsEditThemeModalOpen(true);
+  const closeEditThemeModal = () => setIsEditThemeModalOpen(false);
+
   return (
     <ModalsContext.Provider
       value={{
@@ -46,6 +53,12 @@ export default function ModalsContextProvider({ children }) {
         isEditSlideModalOpen,
         showEditSlideModal,
         closeEditSlideModal,
+        isCreateThemeModalOpen,
+        showCreateThemeModal,
+        closeCreateThemeModal,
+        isEditThemeModalOpen,
+        showEditThemeModal,
+        closeEditThemeModal,
       }}
     >
       {children}

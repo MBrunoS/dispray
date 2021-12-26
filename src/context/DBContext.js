@@ -43,8 +43,7 @@ export default function DBContextProvider({ children }) {
 
   // update or insert
   async function upsertTheme(theme) {
-    const { id } = await themesDB.put(theme);
-    const updated = await themesDB.get(id);
+    await themesDB.put(theme);
     fetchThemes();
   }
 
@@ -53,12 +52,12 @@ export default function DBContextProvider({ children }) {
       value={{
         meetingsDB,
         meetings,
-        fetchThemes,
-        upsertTheme,
-        themesDB,
-        themes,
         fetchMeetings,
         upsertMeeting,
+        themesDB,
+        themes,
+        fetchThemes,
+        upsertTheme,
         INIT_ACTIVE_MEETING,
         activeMeeting,
         setActiveMeeting,

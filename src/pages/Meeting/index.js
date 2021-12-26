@@ -12,11 +12,12 @@ import CreateMeetingModal from "../../components/Modals/Meetings/Create";
 import MeetingQueue from "./Queue";
 
 export default function Meeting() {
-  const { activeMeeting, fetchMeetings } = useContext(DBContext);
+  const { activeMeeting, fetchMeetings, fetchThemes } = useContext(DBContext);
   const { showCreateModal, showEditModal } = useContext(ModalsContext);
 
   useEffect(() => {
     fetchMeetings();
+    fetchThemes();
   }, []);
 
   return (
