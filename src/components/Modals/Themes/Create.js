@@ -71,7 +71,7 @@ export default function CreateThemeModal() {
         <Modal.Title>Novo Tema</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
           <Row className="g-2" md={2}>
             <Form.Control
               value={title}

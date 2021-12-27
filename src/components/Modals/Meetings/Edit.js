@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";
@@ -79,24 +77,22 @@ export default function EditMeetingModal() {
           <Modal.Title>Editar Reunião</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <InputGroup>
-              <Form.Control
-                placeholder="Nome da Reunião"
-                value={name}
-                onChange={handleNameChange}
-              />
-              <Button type="submit">Salvar</Button>
-            </InputGroup>
+          <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
+            <Form.Control
+              placeholder="Nome da Reunião"
+              value={name}
+              onChange={handleNameChange}
+            />
 
-            <Row className="mt-2">
-              <Col className="d-flex justify-content-center">
-                <Button variant="danger" onClick={handleDelete}>
-                  <i className="bi bi-trash-fill"></i>
-                  Excluir
-                </Button>
-              </Col>
-            </Row>
+            <div className="d-flex flex-row gap-2">
+              <Button variant="danger" onClick={handleDelete} className="w-50">
+                <i className="bi bi-trash-fill"></i>
+                Excluir
+              </Button>
+              <Button type="submit" className="w-50">
+                Salvar alteração
+              </Button>
+            </div>
           </Form>
         </Modal.Body>
       </Modal>

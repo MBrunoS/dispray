@@ -53,13 +53,12 @@ export default function EditSlideModal({ content, index }) {
           <Modal.Title>Editar Slide</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
             <Form.Control
               as="textarea"
               rows={5}
               value={text}
               onChange={handleTextChange}
-              className="mb-2"
             />
             <Button type="submit">Editar</Button>
           </Form>

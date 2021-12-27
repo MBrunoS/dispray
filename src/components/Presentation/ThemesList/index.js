@@ -50,7 +50,7 @@ export default function ThemesList() {
       <div className="d-flex">
         <h4 className="flex-grow-1 themes-title">Temas</h4>
         <Button
-          variant="primary-dark"
+          // variant="primary-dark"
           className="rounded-0"
           onClick={showCreateThemeModal}
         >

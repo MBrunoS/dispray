@@ -6,14 +6,16 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
+import useDialog from "../../../hooks/useDialog";
 
 export default function EditThemeModal({ theme }) {
   const { isEditThemeModalOpen, closeEditThemeModal } =
     useContext(ModalsContext);
-  const { upsertTheme } = useContext(DBContext);
+  const { themesDB, upsertTheme, fetchThemes } = useContext(DBContext);
 
   const [title, setTitle] = useState("");
   const [colors, setColors] = useState({});
+  const dialog = useDialog();
 
   useEffect(() => {
     setTitle(theme.title);
@@ -55,13 +57,31 @@ export default function EditThemeModal({ theme }) {
     closeEditThemeModal();
   };
 
+  const handleDelete = () => {
+    dialog(
+      {
+        type: "none",
+        buttons: ["Não", "Sim"],
+        title: "Confimar exclusão",
+        message: "Tem certeza que deseja excluir este tema?",
+      },
+      (response) => {
+        if (response === 1) {
+          themesDB.remove(theme);
+          fetchThemes();
+          closeEditThemeModal();
+        }
+      }
+    );
+  };
+
   return (
     <Modal show={isEditThemeModalOpen} onHide={closeEditThemeModal} centered>
       <Modal.Header closeButton>
         <Modal.Title>Editar Tema</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
           <Row className="g-2" md={2}>
             <Form.Control
               value={title}
@@ -93,7 +113,16 @@ export default function EditThemeModal({ theme }) {
               </Col>
             ))}
           </Row>
-          <Button type="submit">Editar</Button>
+
+          <div className="d-flex flex-row gap-2">
+            <Button variant="danger" onClick={handleDelete} className="w-50">
+              <i className="bi bi-trash-fill"></i>
+              Excluir
+            </Button>
+            <Button type="submit" className="w-50">
+              Salvar alterações
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

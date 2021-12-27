@@ -47,15 +47,13 @@ export default function CreateMeetingModal() {
           <Modal.Title>Nova Reunião</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <InputGroup>
-              <Form.Control
-                placeholder="Nome da Reunião"
-                value={name}
-                onChange={handleNameChange}
-              />
-              <Button type="submit">Criar</Button>
-            </InputGroup>
+          <Form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
+            <Form.Control
+              placeholder="Nome da Reunião"
+              value={name}
+              onChange={handleNameChange}
+            />
+            <Button type="submit">Criar reunião</Button>
           </Form>
         </Modal.Body>
       </Modal>
