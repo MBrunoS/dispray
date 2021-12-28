@@ -10,6 +10,7 @@ export default function Home() {
       <img
         src={process.env.PUBLIC_URL + "/logo-white.png"}
         className="logo mb-4"
+        alt="Dispray"
       />
       <Link to="/meeting" className="home-link">
         <Button variant="primary">Exibir Reuniões</Button>

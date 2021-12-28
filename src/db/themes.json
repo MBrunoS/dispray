@@ -18,6 +18,15 @@
     }
   },
   {
+    "title": "Simples (Dispray)",
+    "primaryText": { "color": "#ffffff" },
+    "secondaryText": { "color": "#0d6efd" },
+    "styles": {
+      "backgroundColor": "#121924",
+      "emphasisColor": "#0d6efd"
+    }
+  },
+  {
     "title": "Congresso (Claro)",
     "primaryText": { "color": "#000000" },
     "secondaryText": { "color": "#f6911f" },

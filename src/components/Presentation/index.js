@@ -25,7 +25,7 @@ export default function Presentation() {
             </Col>
           </Row>
           <Row>
-            <Col className="theme-editor">
+            <Col className="theme-editor mh-100 d-flex flex-column overflow-hidden">
               <ThemesList />
             </Col>
           </Row>

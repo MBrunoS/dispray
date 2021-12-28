@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { DBContext } from "../../../context/DBContext";
 import { ModalsContext } from "../../../context/ModalsContext";

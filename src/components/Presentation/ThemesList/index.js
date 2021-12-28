@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { DBContext } from "../../../context/DBContext";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -58,8 +58,8 @@ export default function ThemesList() {
         </Button>
       </div>
 
-      <Container fluid>
-        <Row md={3} lg={4} className="py-2 g-2">
+      <Container fluid className="scrollable">
+        <Row md={3} lg={4} className="py-2 g-2 h-100">
           {themes.map((theme, i) => (
             <Col key={i}>
               <Card className="text-center theme-card">
