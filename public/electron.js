@@ -12,11 +12,15 @@ const isDev = require("electron-is-dev");
 let mainWindow, projectionWindow;
 
 function createWindow() {
+  const factor = screen.getPrimaryDisplay().scaleFactor;
+
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 680,
+    width: 900 / factor,
+    height: 680 / factor,
     backgroundColor: "#121924",
+    minWidth: 800,
     webPreferences: {
+      zoomFactor: 1.0 / factor,
       nodeIntegration: false,
       preload: `${path.join(__dirname, "/preload.js")}`,
     },
@@ -30,12 +34,15 @@ function createWindow() {
 }
 
 function createProjectionWindow() {
-  let config = {};
+  let config = {},
+    factor = screen.getPrimaryDisplay().scaleFactor;
   const displays = screen.getAllDisplays();
   const externalDisplay = displays.find((display) => {
     return display.bounds.x !== 0 || display.bounds.y !== 0;
   });
+
   if (externalDisplay) {
+    factor = externalDisplay.scaleFactor;
     config = {
       x: externalDisplay.bounds.x + 50,
       y: externalDisplay.bounds.y + 50,
@@ -43,13 +50,15 @@ function createProjectionWindow() {
       fullscreen: true,
     };
   }
+
   projectionWindow = new BrowserWindow({
     ...config,
-    parent: mainWindow,
     closable: false,
     show: false,
+    parent: mainWindow,
     backgroundColor: "#000000",
     webPreferences: {
+      zoomFactor: 1.0 / factor,
       nodeIntegration: false,
       preload: `${path.join(__dirname, "/preload.js")}`,
     },
@@ -83,6 +92,13 @@ function createProjectionWindow() {
 
     ipcMain.on("PROJECTION_UPDATE_TEXT", (e, data) => {
       projectionWindow.webContents.send("update-projection-text", data);
+    });
+
+    ipcMain.on("PROJECTION_UPDATE_PREVIEW", async () => {
+      console.log("UPDATING PREVIEW");
+      const img = await projectionWindow.webContents.capturePage();
+      const data = img.toDataURL();
+      mainWindow.webContents.send("projection-screen", data);
     });
 
     ipcMain.on("PROJECTION_CLEAR_THEME", () => {

@@ -11,7 +11,7 @@ export default function Projection() {
   const [primaryText, setPrimaryText] = useState("");
   const [secondaryText, setSecondaryText] = useState("");
 
-  const css = `.emphasis { color: ${theme.styles.emphasisColor} }`;
+  const css = `.emphasis { color: ${theme.emphasisColor} }`;
 
   useEffect(() => {
     window.electron.ipcRenderer.on("update-projection-theme", (e, newTheme) => {
@@ -43,6 +43,10 @@ export default function Projection() {
       window.electron.ipcRenderer.removeAllListeners("clear-projection-text");
     };
   }, []);
+
+  useEffect(() => {
+    window.electron.ipcRenderer.send("PROJECTION_UPDATE_PREVIEW");
+  }, [primaryText, theme]);
 
   return (
     <div
