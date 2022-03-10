@@ -5,7 +5,6 @@ export default function Preview() {
 
   useEffect(() => {
     window.electron.ipcRenderer.on("projection-screen", (e, data) => {
-      console.log("UPDATING PREVIEW");
       setPreview(data);
     });
 

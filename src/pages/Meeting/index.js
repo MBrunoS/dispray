@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { DBContext } from "../../context/DBContext";
@@ -14,10 +14,24 @@ import MeetingQueue from "./Queue";
 export default function Meeting() {
   const { activeMeeting, fetchMeetings, fetchThemes } = useContext(DBContext);
   const { showCreateModal, showEditModal } = useContext(ModalsContext);
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     fetchMeetings();
     fetchThemes();
+
+    window.electron.ipcRenderer.on(
+      "projection-screen-dimensions",
+      (e, { width, height }) => {
+        setScreenSize({ width, height });
+      }
+    );
+
+    return () => {
+      window.electron.ipcRenderer.removeAllListeners(
+        "projection-screen-dimensions"
+      );
+    };
   }, []);
 
   return (
@@ -40,7 +54,7 @@ export default function Meeting() {
         </Col>
 
         <Col xs={10} className="presentation">
-          <Presentation />
+          <Presentation projectionScreenSize={screenSize} />
         </Col>
       </Row>
 

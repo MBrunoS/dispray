@@ -86,26 +86,34 @@ function createProjectionWindow() {
   });
 
   projectionWindow.webContents.on("did-finish-load", () => {
+    const winBounds = projectionWindow.getBounds();
+    const projectionScreen = screen.getDisplayNearestPoint({
+      x: winBounds.x,
+      y: winBounds.y,
+    });
+
+    mainWindow.webContents.send(
+      "projection-screen-dimensions",
+      projectionScreen.size
+    );
+
     ipcMain.on("PROJECTION_UPDATE_THEME", (e, newTheme) => {
+      mainWindow.webContents.send("update-projection-theme", newTheme);
       projectionWindow.webContents.send("update-projection-theme", newTheme);
     });
 
     ipcMain.on("PROJECTION_UPDATE_TEXT", (e, data) => {
+      mainWindow.webContents.send("update-projection-text", data);
       projectionWindow.webContents.send("update-projection-text", data);
     });
 
-    ipcMain.on("PROJECTION_UPDATE_PREVIEW", async () => {
-      console.log("UPDATING PREVIEW");
-      const img = await projectionWindow.webContents.capturePage();
-      const data = img.toDataURL();
-      mainWindow.webContents.send("projection-screen", data);
-    });
-
     ipcMain.on("PROJECTION_CLEAR_THEME", () => {
+      mainWindow.webContents.send("clear-projection-theme");
       projectionWindow.webContents.send("clear-projection-theme");
     });
 
     ipcMain.on("PROJECTION_CLEAR_TEXT", () => {
+      mainWindow.webContents.send("clear-projection-text");
       projectionWindow.webContents.send("clear-projection-text");
     });
   });

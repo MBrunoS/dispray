@@ -5,9 +5,13 @@ import { DBContext } from "../../context/DBContext";
 import Slider from "../Slider/";
 import Preview from "./Preview";
 import ThemesList from "./ThemesList";
+import Projection from "../../pages/Projection";
+import { ProjectionPreview } from "./styles";
 
-export default function Presentation() {
+export default function Presentation({ projectionScreenSize }) {
   const { activeItem } = useContext(DBContext);
+  const { width, height } = projectionScreenSize;
+  const projectionScreenAspectRatio = width / height;
 
   return (
     activeItem && (
@@ -21,7 +25,9 @@ export default function Presentation() {
         <Col className="preview-themes">
           <Row>
             <Col className="d-flex flex-column justify-content-center">
-              <Preview />
+              <ProjectionPreview aspectRatio={projectionScreenAspectRatio}>
+                <Projection />
+              </ProjectionPreview>
             </Col>
           </Row>
           <Row>
