@@ -125,19 +125,21 @@ app.on("ready", () => {
   createWindow();
   createProjectionWindow();
 
-  // react dev tools
-  const {
-    default: installExtension,
-    REACT_DEVELOPER_TOOLS,
-  } = require("electron-devtools-installer");
+  if (isDev) {
+    // react dev tools
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS,
+    } = require("electron-devtools-installer");
 
-  installExtension(REACT_DEVELOPER_TOOLS)
-    .then((name) => {
-      console.log(`Added Extension:  ${name}`);
-    })
-    .catch((err) => {
-      console.log("An error occurred: ", err);
-    });
+    installExtension(REACT_DEVELOPER_TOOLS)
+      .then((name) => {
+        console.log(`Added Extension:  ${name}`);
+      })
+      .catch((err) => {
+        console.log("An error occurred: ", err);
+      });
+  }
 });
 
 app.on("window-all-closed", () => {
