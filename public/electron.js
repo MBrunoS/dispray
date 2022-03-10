@@ -119,7 +119,7 @@ function createProjectionWindow() {
   });
 }
 
-// Menu.setApplicationMenu(null);
+Menu.setApplicationMenu(null);
 
 app.on("ready", () => {
   createWindow();
