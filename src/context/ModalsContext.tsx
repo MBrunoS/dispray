@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const ModalsContext = React.createContext();
+export const ModalsContext = React.createContext(null);
 
 export default function ModalsContextProvider({ children }) {
   const [isMeetingsModalOpen, setIsMeetingsModalOpen] = useState(true);

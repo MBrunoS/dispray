@@ -5,15 +5,20 @@ export const getBooksNames = () => {
   return bible.map((book) => book.name);
 };
 
-export const getChaptersNumber = (book) => {
+export const getChaptersNumber = (book: string) => {
   return bible.find((b) => b.name === book).chapters.length;
 };
 
-export const getVersesNumber = (book, chapter) => {
+export const getVersesNumber = (book: string, chapter: number) => {
   return bible.find((b) => b.name === book).chapters[chapter - 1].length;
 };
 
-export const getPassage = (book, chapter, vStart, vEnd) => {
+export const getPassage = (
+  book: string,
+  chapter: number,
+  vStart: number,
+  vEnd: number
+) => {
   const verses = bible
     .find((b) => b.name === book)
     .chapters[chapter - 1].slice(vStart - 1, vEnd);
@@ -31,8 +36,8 @@ export const getPassage = (book, chapter, vStart, vEnd) => {
   };
 };
 
-export const searchBible = (text, limit) => {
-  const results = [];
+export const searchBible = (text: string, limit: number) => {
+  const results: BiblePassage[] = [];
 
   for (const book of bible) {
     for (const [chapIndex, chapter] of book.chapters.entries()) {
@@ -58,8 +63,8 @@ export const searchBible = (text, limit) => {
   return results;
 };
 
-export const searchSongs = (text, limit) => {
-  const results = [];
+export const searchSongs = (text: string, limit: number) => {
+  const results: Songs[] = [];
 
   for (const song of songs) {
     for (const stanza of song.lyric) {

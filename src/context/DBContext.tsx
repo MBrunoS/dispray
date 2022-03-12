@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PouchDB from "pouchdb-browser";
 
-export const DBContext = React.createContext();
-
+export const DBContext = React.createContext(null);
 export default function DBContextProvider({ children }) {
   const meetingsDB = new PouchDB("dispray-services");
   const themesDB = new PouchDB("dispray-themes");
@@ -14,13 +13,14 @@ export default function DBContextProvider({ children }) {
     theme: null,
   };
 
-  const [meetings, setMeetings] = useState([]);
-  const [themes, setThemes] = useState([]);
-  const [activeMeeting, setActiveMeeting] = useState(INIT_ACTIVE_MEETING);
-  const [activeItem, setActiveItem] = useState(null);
+  const [meetings, setMeetings] = useState<Meeting[]>([]);
+  const [themes, setThemes] = useState<Theme[]>([]);
+  const [activeMeeting, setActiveMeeting] =
+    useState<Meeting>(INIT_ACTIVE_MEETING);
+  const [activeItem, setActiveItem] = useState<Element>(null);
 
   async function fetchMeetings() {
-    const find = await meetingsDB.allDocs({
+    const find = await meetingsDB.allDocs<Meeting>({
       include_docs: true,
     });
     setMeetings(find.rows.map((item) => item.doc));
@@ -29,13 +29,13 @@ export default function DBContextProvider({ children }) {
   // update or insert
   async function upsertMeeting(meeting) {
     const { id } = await meetingsDB.put(meeting);
-    const updated = await meetingsDB.get(id);
+    const updated = await meetingsDB.get<Meeting>(id);
     setActiveMeeting(updated);
     fetchMeetings();
   }
 
   async function fetchThemes() {
-    const find = await themesDB.allDocs({
+    const find = await themesDB.allDocs<Theme>({
       include_docs: true,
     });
     setThemes(find.rows.map((item) => item.doc));
