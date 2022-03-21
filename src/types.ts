@@ -1,11 +1,11 @@
-type Meeting = {
+export type Meeting = {
   _id: string;
   name: string;
-  elements: BiblePassage[] | Songs[];
-  theme: Theme;
+  elements: BiblePassage[] | Song[];
+  theme: Theme | null;
 };
 
-type Theme = {
+export type Theme = {
   title: string;
   primaryText: { color: string };
   secondaryText: { color: string };
@@ -19,7 +19,7 @@ type Theme = {
   };
 };
 
-type BiblePassage = {
+export type BiblePassage = {
   index: number;
   type: "passage";
   book: string;
@@ -29,7 +29,7 @@ type BiblePassage = {
   reference: string;
 };
 
-type Songs = {
+export type Song = {
   index: number;
   type: "song";
   title: string;

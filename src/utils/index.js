@@ -1,24 +1,20 @@
 import bible from "../db/acf.json";
 import songs from "../db/songs.json";
+import { BiblePassage, Song } from "../types";
 
 export const getBooksNames = () => {
   return bible.map((book) => book.name);
 };
 
-export const getChaptersNumber = (book: string) => {
+export const getChaptersNumber = (book) => {
   return bible.find((b) => b.name === book).chapters.length;
 };
 
-export const getVersesNumber = (book: string, chapter: number) => {
+export const getVersesNumber = (book, chapter) => {
   return bible.find((b) => b.name === book).chapters[chapter - 1].length;
 };
 
-export const getPassage = (
-  book: string,
-  chapter: number,
-  vStart: number,
-  vEnd: number
-) => {
+export const getPassage = (book, chapter, vStart, vEnd) => {
   const verses = bible
     .find((b) => b.name === book)
     .chapters[chapter - 1].slice(vStart - 1, vEnd);
@@ -36,8 +32,8 @@ export const getPassage = (
   };
 };
 
-export const searchBible = (text: string, limit: number) => {
-  const results: BiblePassage[] = [];
+export const searchBible = (text, limit) => {
+  const results = [];
 
   for (const book of bible) {
     for (const [chapIndex, chapter] of book.chapters.entries()) {
@@ -63,8 +59,8 @@ export const searchBible = (text: string, limit: number) => {
   return results;
 };
 
-export const searchSongs = (text: string, limit: number) => {
-  const results: Songs[] = [];
+export const searchSongs = (text, limit) => {
+  const results = [];
 
   for (const song of songs) {
     for (const stanza of song.lyric) {

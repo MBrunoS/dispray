@@ -4,6 +4,11 @@ Display Bible verses and songs with ease. This project aims to build a user-frie
 
 _**Still in early stages, but minimally functional**_
 
+## Screenshots
+
+<img src="design-system/screenshots/init.png" width="400" alt="Screen with a modal asking user to create new meeting">
+<img src="design-system/screenshots/meeting.png" width="400" alt="Meeting screen displaying list of items, selected verse and displaying a preview of the verse, with themes option below">
+
 ## Available Scripts
 
 In the project directory, you can run:

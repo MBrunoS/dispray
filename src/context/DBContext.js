@@ -13,14 +13,13 @@ export default function DBContextProvider({ children }) {
     theme: null,
   };
 
-  const [meetings, setMeetings] = useState<Meeting[]>([]);
-  const [themes, setThemes] = useState<Theme[]>([]);
-  const [activeMeeting, setActiveMeeting] =
-    useState<Meeting>(INIT_ACTIVE_MEETING);
-  const [activeItem, setActiveItem] = useState<Element>(null);
+  const [meetings, setMeetings] = useState([]);
+  const [themes, setThemes] = useState([]);
+  const [activeMeeting, setActiveMeeting] = useState(INIT_ACTIVE_MEETING);
+  const [activeItem, setActiveItem] = useState(null);
 
   async function fetchMeetings() {
-    const find = await meetingsDB.allDocs<Meeting>({
+    const find = await meetingsDB.allDocs({
       include_docs: true,
     });
     setMeetings(find.rows.map((item) => item.doc));
@@ -29,13 +28,13 @@ export default function DBContextProvider({ children }) {
   // update or insert
   async function upsertMeeting(meeting) {
     const { id } = await meetingsDB.put(meeting);
-    const updated = await meetingsDB.get<Meeting>(id);
+    const updated = await meetingsDB.get(id);
     setActiveMeeting(updated);
     fetchMeetings();
   }
 
   async function fetchThemes() {
-    const find = await themesDB.allDocs<Theme>({
+    const find = await themesDB.allDocs({
       include_docs: true,
     });
     setThemes(find.rows.map((item) => item.doc));
